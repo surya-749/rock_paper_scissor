@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+        margin: 0px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        }
+        button{
+            border-radius: 50px;
+            height: 100px;
+            width: 100px;
+
+        }
+        .select{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            width: 500px;
+            align-items: center;
+            flex-direction: row;
+            gap: 20px;
+            border: 2px solid black;
+            padding: 20px;
+            margin: 50px;
+            box-shadow: 0 4px 20px 0 rgba(75, 238, 0, 0.5), 0 4px 40px 0 rgba(0,212,255,0.3);
+            border: 2px solid rgb(0, 128, 255);
+            border-radius: 15px;
+        }
+        #rock{
+            background:url('rock.png');
+            background-size: cover;
+            object-fit: cover;
+            
+        }
+        #paper{
+            background:url('paper.png');
+            background-size: cover;
+            object-fit: cover;
+        }
+        #scissor{
+            background:url('scissor.png');
+            background-size: cover;
+            object-fit: cover;
+        }
+        #man-choice,#computer-choice{
+            height: 100px;
+            width: 100px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 50px;
+        
+        }
+        #result{
+            text-align: center;
+            font-size: 24px;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: all 0.3s ease-in-out ;
+        }
+    </style>
+    <script>
+        function makeChoice(userChoice) {
+            const choices = ['rock', 'paper', 'scissor'];
+            const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+
+            document.getElementById('man-choice').style.backgroundImage = `url('${userChoice}.png')`;
+            document.getElementById('computer-choice').style.backgroundImage = `url('${computerChoice}.png')`;
+            document.getElementById('x').style.visibility = 'visible';
+            if (userChoice === computerChoice) {
+                document.getElementById('result').innerText = "It's a tie!";
+            } else if (
+                (userChoice === 'rock' && computerChoice === 'scissor') ||
+                (userChoice === 'paper' && computerChoice === 'rock') ||
+                (userChoice === 'scissor' && computerChoice === 'paper')
+            ) {
+                document.getElementById('result').innerText = "You win!";
+                document.getElementById('result').style.color = "green";
+            } else {
+                document.getElementById('result').innerText = "You lose!";
+                document.getElementById('result').style.color = "red";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="select">
+        <button id="rock" onclick="makeChoice('rock')"></button>
+        <button id="paper" onclick="makeChoice('paper')"></button>  
+        <button id="scissor" onclick="makeChoice('scissor')"></button>
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 20px;flex-direction: row;">
+        
+        <div id="man-choice"></div>
+        <h1 style="font-weight: 700;visibility: hidden;" id="x">X</h1>
+        <div id="computer-choice"></div>
+        
+        
+    </div>
+    <div id="result"></div>
+
+</body>
+
+</html>
